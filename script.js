@@ -38,7 +38,7 @@
         "Bierenbaum Fisher Hall": ["Fisher hall 101", "Fisher Room 202", "Fisher Study 104"],
         "Science & Tech Center": ["Sci Lab 12", "Tech Room 201", "STC Auditorium"],
         "Anne Brossman Sweigart Hall": ["SWG Room 104", "SWG Study 202", "SWG Lab 310"],
-        "Fine Arts Center": ["Yvonne Theater", "Fine Arts 112", "Fine Arts 220"],
+        "Fine Arts Center": ["Fine Arts 202", "Fine Arts 112", "Fine Arts 220"],
         "Lynch Adler Hall": ["LA 105", "LA 121", "LA 205"],
         "Moore Library": ["Study Room A", "Study Room B", "Conference Room"],
         "default": ["Main Hall"]
