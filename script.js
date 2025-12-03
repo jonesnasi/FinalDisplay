@@ -67,7 +67,7 @@
     "Swe Hall 22": "IMG_1074.jpeg",
     "Business Lab 310": "IMG_1085.jpeg",
 
-    "Yvonne Theater": "IMG_1092.jpeg",
+    "Fine Arts 202": "IMG_1092.jpeg",
     "Fine Arts 112": "IMG_1074.jpeg",
     "Fine Arts 220": "IMG_1025.jpeg",
 
