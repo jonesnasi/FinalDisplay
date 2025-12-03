@@ -37,7 +37,7 @@
     }
 
     function genId() {
-        return "r_" + Date.now() + "_" + Math.floor(Math.random() * 9999);
+        return "ID_" + Date.now() + "_" + Math.floor(Math.random() * 9999);
     }
 
     /* --------------------
@@ -45,15 +45,40 @@
     -------------------- */
 
     const ROOM_DIRECTORY = {
-        "Bierenbaum Fisher Hall": ["Lecture Room 101", "Lecture Room 202", "Studio 3"],
+        "Bierenbaum Fisher Hall": ["Fisher hall 101", "Fisher Room 202", "Fisher Study 104"],
         "Science & Tech Center": ["Sci Lab 12", "Tech Room 201", "STC Auditorium"],
-        "Anne Brossman Sweigart Hall": ["Swe Hall 10", "Swe Hall 22", "Business Lab 310"],
+        "Anne Brossman Sweigart Hall": ["SWG Room 104", "SWG Study 202", "SWG Lab 310"],
         "Fine Arts Center": ["Yvonne Theater", "Fine Arts 112", "Fine Arts 220"],
         "Lynch Adler Hall": ["LA 105", "LA 121", "LA 205"],
         "Moore Library": ["Study Room A", "Study Room B", "Conference Room"],
         "default": ["Main Hall"]
     };
 
+    const ROOM_IMAGES = {
+    "Lecture Room 101": "IMG_1032.jpeg",
+    "Lecture Room 202": "IMG_1080.jpeg",
+    "Studio 3": "IMG_1067.jpeg",
+
+    "Sci Lab 12": "IMG_1092.jpeg",
+    "Tech Room 201": "IMG_1089.jpeg",
+    "STC Auditorium": "IMG_1074.jpeg",
+
+    "Swe Hall 10": "IMG_1089.jpeg",
+    "Swe Hall 22": "IMG_1074.jpeg",
+    "Business Lab 310": "IMG_1085.jpeg",
+
+    "Yvonne Theater": "IMG_1092.jpeg",
+    "Fine Arts 112": "IMG_1074.jpeg",
+    "Fine Arts 220": "IMG_1025.jpeg",
+
+    "LA 105": "images/la105.jpg",
+    "LA 121": "IMG_1085.jpeg",
+    "LA 205": "IMG_1025.jpeg",
+
+    "Study Room A": "IMG_1080.jpeg",
+    "Study Room B": "IMG_1080.jpeg",
+    "Conference Room": "IMG_1085.jpeg"
+};
     /* --------------------
        Theme Toggle
     -------------------- */
@@ -134,6 +159,7 @@
         if (document.querySelector("#email")) {
             document.querySelector("#email").value = savedEmail;
         }
+
         /* ---- Populate rooms ---- */
         function populateRooms(buildingName) {
             const rooms = ROOM_DIRECTORY[buildingName] || ROOM_DIRECTORY["default"];
@@ -145,6 +171,23 @@
                 roomSelect.appendChild(opt);
             });
         }
+        // Update room image whenever room select changes
+if (roomSelect) {
+    const img = document.querySelector("#roomImage");
+
+    function updateRoomImage() {
+        const selected = roomSelect.value;
+        img.src = ROOM_IMAGES[selected] || "images/default-room.jpg";
+    }
+
+    // Update when user changes the room
+    roomSelect.addEventListener("change", updateRoomImage);
+
+    // Also update when rooms are first populated
+    updateRoomImage();
+}
+
+
 
         if (buildingSelect) {
             if (storedBuilding) buildingSelect.value = storedBuilding;

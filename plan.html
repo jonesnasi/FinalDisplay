@@ -42,9 +42,16 @@ You may have up to <strong>2 active reservations</strong> using a Rider email.
     </div>
 
     <div class="form-row">
-        <label for="building">Selected Building</label>
-        <input id="building" type="text" readonly placeholder="(Choose a building from the map)">
-    </div>
+    <label for="buildingSelect">Select Building</label>
+    <select id="buildingSelect">
+        <option>Bierenbaum Fisher Hall</option>
+        <option>Science & Tech Center</option>
+        <option>Anne Brossman Sweigart Hall</option>
+        <option>Fine Arts Center</option>
+        <option>Lynch Adler Hall</option>
+        <option>Moore Library</option>
+    </select>
+</div>
 
     <div class="form-row">
         <label for="room">Available Rooms</label>
@@ -68,6 +75,12 @@ You may have up to <strong>2 active reservations</strong> using a Rider email.
         <textarea id="notes" maxlength="200" placeholder="Any special requirements..."></textarea>
         <p id="charCounter">0 / 200</p>
     </div>
+
+    <!-- NEW: Room Preview Image -->
+<div class="form-row">
+    <label>Room Preview</label>
+  <img id="roomImage" src="IMG_1025.jpeg" alt="Preview" style="width: 400px">
+</div>
 
     <div class="form-actions">
         <button type="submit" class="btn-primary">Submit Reservation</button>
