@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Current Reservations</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+<ul>
+    <li class="brand">
+        <img src="https://www.wgcpas.com/wp-content/uploads/2020/03/RIDER-University-logo.png" alt="Rider logo"/>
+    </li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plan.html">Plan</a></li>
+    <li><a href="current.html" class="active">Current</a></li>
+    <li><button id="themeToggle">🌙</button></li>
+</ul>
+</nav>
+
+<main class="container">
+
+<h2>Your Active Reservations</h2>
+<p class="lead">
+Below are all reservations linked to your Rider email.  
+You may delete reservations from this page.
+</p>
+
+<!-- Email input for retrieving reservations -->
+<div class="card" style="margin-bottom:20px;">
+    <label for="lookupEmail">Enter your Rider email:</label>
+    <input id="lookupEmail" type="email" placeholder="name@rider.edu">
+    <button id="lookupBtn" class="btn-primary" style="margin-top:10px;">Load My Reservations</button>
+</div>
+
+<!-- Loaded reservations appear here -->
+<ul id="reservation-list"></ul>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+// Helper to format date/time nicely
+function formatDisplay(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleString(); // You can customize formatting here
+}
+
+// Load all reservations from localStorage
+function loadAllReservations() {
+    return JSON.parse(localStorage.getItem("rider_reservations") || "[]");
+}
+
+// Render reservations for a specific email
+function loadReservationsForEmail(email) {
+    const list = document.getElementById("reservation-list");
+    list.innerHTML = "";
+
+    const all = loadAllReservations();
+    const reservations = all.filter(r => r.email === email);
+
+    if (reservations.length === 0) {
+        const msg = document.createElement("li");
+        msg.textContent = "No reservations found.";
+        list.appendChild(msg);
+        return;
+    }
+
+    reservations.forEach(r => {
+        const item = document.createElement("li");
+        item.className = "reservation-item";
+
+        item.innerHTML = `
+            <div>
+                <strong>${r.title}</strong> - ${r.fullname}<br>
+                ${r.building} • ${r.room}<br>
+                ${formatDisplay(r.start)} - ${formatDisplay(r.end)}
+            </div>
+        `;
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "btn-secondary";
+        delBtn.style.marginTop = "5px";
+
+        delBtn.addEventListener("click", () => {
+            if (!confirm("Delete this reservation?")) return;
+
+            // Remove from localStorage
+            const updated = all.filter(x => x.id !== r.id);
+            localStorage.setItem("rider_reservations", JSON.stringify(updated));
+
+            // Remove from DOM
+            item.remove();
+
+            // If list becomes empty, show message
+            if (list.children.length === 0) {
+                const msg = document.createElement("li");
+                msg.textContent = "No reservations found.";
+                list.appendChild(msg);
+            }
+        });
+
+        item.appendChild(delBtn);
+        list.appendChild(item);
+    });
+
+    // Save last used email
+    localStorage.setItem("last_email", email);
+}
+
+// Handle Load button click
+document.getElementById("lookupBtn").addEventListener("click", () => {
+    const emailInput = document.getElementById("lookupEmail").value.trim();
+    if (!emailInput) {
+        alert("Please enter your Rider email.");
+        return;
+    }
+    loadReservationsForEmail(emailInput);
+});
+
+// Preload last used email and load reservations on page load
+document.addEventListener("DOMContentLoaded", () => {
+    const storedEmail = localStorage.getItem("last_email");
+    if (storedEmail) {
+        document.getElementById("lookupEmail").value = storedEmail;
+        loadReservationsForEmail(storedEmail);
+    }
+});
+
+
+</script>
+
+</script>
+
+
+</body>
+</html>
