@@ -1,13 +1,3 @@
-// script.js
-// Rider Reservation System - Cleaned, commented, beginner-friendly (Option B)
-// - Enforces 1.5 hour reservations
-// - Max 2 active reservations per rider email
-// - Supports building chosen on Home (via localStorage) OR a dropdown on Plan
-// - Manage (delete) reservations via a modal
-// - Summary page shows last-created reservation + list of active reservations
-// ================= Rider Reservation System ===================
-// Full JS — fixed, improved, and ready to paste in one block
-// =============================================================
 
 (function () {
     "use strict";
@@ -41,7 +31,7 @@
     }
 
     /* --------------------
-       Room Directory
+       Room and image Directory
     -------------------- */
 
     const ROOM_DIRECTORY = {
@@ -71,7 +61,7 @@
     "Fine Arts 112": "IMG_1074.jpeg",
     "Fine Arts 220": "IMG_1025.jpeg",
 
-    "LA 105": "images/la105.jpg",
+    "LA 105": "IMG_1032.jpeg",
     "LA 121": "IMG_1085.jpeg",
     "LA 205": "IMG_1025.jpeg",
 
